@@ -1,12 +1,21 @@
-<div class="center jumbotron">
-  <div class="text-center">
-    <h1>タスクリスト一覧</h1>
-  </div>
-<ul>
-  <% @tasks.each do |list| %>
-    <li><%= link_to list.id, list %> : <%= list.content %> : <%= list.status %></li>
-  <% end %>
-</ul>
+<% if logged_in? %>
+  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>タスクリスト一覧</h1>
+    </div>
+    <ul>
+      <% @tasks.each do |list| %>
+        <li><%= link_to list.id, list %> : <%= list.content %> : <%= list.status %></li>
+      <% end %>
+    </ul>
 
-<%= link_to '新規タスクの投稿', new_task_path %>
-</div>
+    <%= link_to '新規タスクの投稿', new_task_path %>
+  </div>  
+<% else %>
+  
+  <li class="nav-item"><%= link_to 'Signup', signup_path, class: 'nav-link' %></li>
+  
+  
+<% end %>
